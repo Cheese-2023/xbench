@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-bench Filtered Vector Search Benchmark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">X-bench</div>
+            <nav>
+                <a href="#about">Overview</a>
+                <a href="#leaderboard">Leaderboard</a>
+                <a href="#workflow">Workflow</a>
+                <a href="#team">Team</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1 class="title-accent title-left">X-bench: End-to-End Filtered Vector Search Benchmark</h1>
+                    <p>
+                        X-bench offers a controllable, system-agnostic suite for benchmarking filtered vector search,
+                        combining high-dimensional similarity lookup with structured scalar filtering to enable fair,
+                        scalable comparisons across vector databases.
+                    </p>
+                    <div class="cta-group">
+                        <a class="btn primary" href="#leaderboard">Explore Leaderboard</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-intro" aria-labelledby="project-intro-title">
+            <div class="container">
+                <h2 class="title-accent title-center" id="project-intro-title">Project Overview</h2>
+                <div class="project-content">
+                    <p>X-bench is a controllable and end-to-end benchmark suite for evaluating filtered vector search—a
+                        core capability of modern vector databases that combines high-dimensional similarity search with
+                        structured scalar filtering. It is designed to reflect realistic filtered search scenarios,
+                        enabling fair, scalable, and explainable performance comparison across diverse database
+                        systems.</p>
+                    <p>X-bench provides a modular, auto-scalable benchmarking pipeline covering data generation, query
+                        synthesis, and workload execution. The benchmark leverages statistically grounded methods—such
+                        as Johnson–Lindenstrauss–based random projection and distribution-aware query generation—to
+                        preserve vector-scalar correlations while flexibly controlling data dimension, scale, filtering
+                        rate, and filter correlation. This design enables systematic stress testing of vector databases
+                        under both static and dynamic workloads, including concurrent queries and online updates.</p>
+                    <p>A unified ranking-based metric (Vrank) aggregates six-phase performance (indexing, query,
+                        concurrency, and update) into a single comparable score, providing a holistic view of system
+                        efficiency and robustness.</p>
+                    <p>X-bench is system-agnostic and can be easily adapted to a wide range of vector databases and
+                        indexing strategies. It encourages combined software–hardware optimization and fair comparison
+                        under standardized configurations, promoting deeper understanding of the trade-offs in filtered
+                        vector search and driving innovation in next-generation vector data systems.</p>
+                    <p>With its controllable workloads, realistic data distributions, and unified metric, X-bench
+                        offers the first principled framework for ranking and understanding filtered vector search
+                        performance at scale.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="leaderboard" class="leaderboard">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="title-accent title-center">Leaderboard</h2>
+                    <p>Click any metric to sort the table. Values highlighted in green indicate the best score for that
+                        column.</p>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead id="leaderboard-head"></thead>
+                        <tbody id="leaderboard-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="workflow" aria-labelledby="workflow-title">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="title-accent title-center" id="workflow-title">X-bench Evaluation Workflow</h2>
+                    <p>X-bench adopts a six-phase end-to-end evaluation workflow to comprehensively measure vector
+                        database performance across static and dynamic workloads. Each phase mirrors a real-world hybrid
+                        search stage, and the unified Vrank metric aggregates all results.</p>
+                </div>
+                <div class="workflow-grid">
+                    <article>
+                        <h3>Initialization Phase</h3>
+                        <p>Load the initial portion of the dataset and build vector indexes.</p>
+                        <p class="metric">Measures: Index construction latency (T₀)</p>
+                    </article>
+                    <article>
+                        <h3>Query Execution Phase</h3>
+                        <p>Execute filtered vector search queries over the indexed data.</p>
+                        <p class="metric">Measures: Average latency and recall</p>
+                    </article>
+                    <article>
+                        <h3>Concurrent Phase</h3>
+                        <p>Run multiple filtered queries simultaneously to assess scalability.</p>
+                        <p class="metric">Measures: Queries per second (QPS)</p>
+                    </article>
+                    <article>
+                        <h3>Incremental Load Phase</h3>
+                        <p>Insert the remaining dataset portion and trigger incremental index updates.</p>
+                        <p class="metric">Measures: Insertion and maintenance time (T₁)</p>
+                    </article>
+                    <article>
+                        <h3>Update Phase</h3>
+                        <p>Modify a subset of scalar attributes to evaluate index maintenance under updates.</p>
+                        <p class="metric">Measures: Update latency (T₂)</p>
+                    </article>
+                    <article>
+                        <h3>Deletion Phase</h3>
+                        <p>Delete part of the dataset to study removal overhead and cleanup efficiency.</p>
+                        <p class="metric">Measures: Deletion latency (T₃)</p>
+                    </article>
+                </div>
+                <div class="workflow-summary">
+                    <h3>Comprehensive Metric</h3>
+                    <p>All six phases are aggregated into the unified Vrank score, delivering a holistic ranking that
+                        captures indexing throughput, query efficiency, concurrency resilience, and dynamic maintenance
+                        cost.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="team">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="title-accent title-center">Team</h2>
+                    <p>Researchers and engineers across search, recommendation, and data infrastructure collaborate to
+                        advance benchmarking standards.</p>
+                </div>
+                <div class="team-grid">
+                    <div class="member">
+                        <img class="avatar" src="https://via.placeholder.com/160x160.png?text=JL"
+                            alt="Member A portrait">
+                        <h3>Member A</h3>
+                        <p>xxx</p>
+                    </div>
+                    <div class="member">
+                        <img class="avatar" src="https://via.placeholder.com/160x160.png?text=WH"
+                            alt="Member B portrait">
+                        <h3>Member B</h3>
+                        <p>xxx</p>
+                    </div>
+                    <div class="member">
+                        <img class="avatar" src="https://via.placeholder.com/160x160.png?text=CY"
+                            alt="Member C portrait">
+                        <h3>Member C</h3>
+                        <p>xxx</p>
+                    </div>
+                    <div class="member">
+                        <img class="avatar" src="https://via.placeholder.com/160x160.png?text=SL"
+                            alt="Member D portrait">
+                        <h3>Member D</h3>
+                        <p>xxx</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 X-bench. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
